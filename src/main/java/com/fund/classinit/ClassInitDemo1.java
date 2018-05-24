@@ -1,6 +1,7 @@
 package com.fund.classinit;
 
-public class Demo01 {
+public class ClassInitDemo1 {
+
     static {
         System.out.println("Demo01的静态代码块");
     }
@@ -11,11 +12,11 @@ public class Demo01 {
 
         //主动引用方式1：new
         new A();
-        System.out.println("new对象时，类会被初始化。com.fund.classinit.A.width："+A.width);
+        System.out.println("主动引用方式1: new对象时，类会被初始化。com.fund.classinit.A.width：" + A.width);
         //主动引用方式2：调用类的静态成员变量或静态方法
-        System.out.println("调用类的静态成员时，类会被初始化。com.fund.classinit.A.width："+A.width);
+        System.out.println("主动引用方式2: 调用类的静态成员时，类会被初始化。com.fund.classinit.A.width：" + A.width);
         //主动引用方式3：Class.forName()映射
-        System.out.println("Class.forName()引用时，类会被初始化。:"+Class.forName("com.fund.classinit.A"));
+        System.out.println("主动引用方式3: Class.forName()引用时，类会被初始化。:" + Class.forName("com.fund.classinit.A"));
 
         /* Execution Result:
         ###################################
@@ -59,4 +60,55 @@ public class Demo01 {
         #######################
         */
     }
+
 }
+
+class A_Father_Father {
+
+    public A_Father_Father() {
+        System.out.println("A_Father_Father的构造函数");
+    }
+
+
+    static {
+        System.out.println("A_Father_Father的静态代码块");
+    }
+}
+
+
+class A_Father extends A_Father_Father {
+
+    public A_Father() {
+        System.out.println("A_Father的构造函数");
+    }
+
+
+    static {
+        System.out.println("A_Father的静态代码块");
+    }
+}
+
+class A extends A_Father {
+
+    public static int width = 100;   //静态变量，静态域    field
+    public static final int MAX = 100;
+
+    static {
+        System.out.println("A的静态代码块");
+        width = 300;
+    }
+
+    public A() {
+        System.out.println("类A的构造函数");
+    }
+}
+
+
+class B extends A {
+    static {
+        System.out.println("类B的静态代码块");
+    }
+}
+
+
+
