@@ -1,4 +1,4 @@
 package com.fund.common;
 
-public class HelloTest {
+public class HiTest {
 }
